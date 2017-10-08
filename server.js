@@ -8,7 +8,9 @@ let express    = require('express'),
     models     = require('./api/api.model')
 
 mongoose.Promise = global.Promise
-mongoose.connect(config.dbUrl)
+mongoose.connect(config.dbUrl, {
+	useMongoClient: true,
+})
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

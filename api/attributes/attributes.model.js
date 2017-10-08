@@ -1,5 +1,6 @@
 let mongoose = require('mongoose'),
-    Schema   = mongoose.Schema
+    Schema   = mongoose.Schema,
+    ObjectId = Schema.ObjectId
 
 let AttributeSchema = new Schema({
 	title: {
