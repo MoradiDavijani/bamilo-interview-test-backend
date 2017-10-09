@@ -13,16 +13,13 @@ mongoose.connect(config.dbUrl, {
 	useMongoClient: true
 })
 
+app.set('secret', config.secret)
+
+app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use(morgan('dev'))
-
 routes(app)
-
-app.use(function (req, res) {
-	res.status(404).send({ message: `url: ${req.originalUrl}  not found` })
-})
 
 app.listen(config.port)
 console.log('Server Started On Port: ' + config.port)
