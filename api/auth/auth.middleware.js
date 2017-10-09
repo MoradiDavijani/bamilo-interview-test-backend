@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
 				message: 'You don\'t have access to this route'
 			})
 		}
+		req.user = decoded
 		return next()
 	})
 }

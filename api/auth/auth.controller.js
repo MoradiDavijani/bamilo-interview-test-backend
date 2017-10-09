@@ -36,5 +36,13 @@ exports.login = (req, res) => {
 }
 
 exports.getUser = (req, res) => {
-
+	Users.findOne({ username: req.user.username }, (err, user) => {
+		if (err) {
+			res.send(err)
+			return
+		}
+		res.json({
+			username: user.username
+		})
+	})
 }
