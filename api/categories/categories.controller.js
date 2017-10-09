@@ -1,5 +1,4 @@
 let mongoose          = require('mongoose'),
-    generalController = require('../general/general.controller'),
     Categories        = mongoose.model('Categories')
 
 let restrictChangingChildren = (req, callback) => {

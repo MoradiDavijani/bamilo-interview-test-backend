@@ -7,22 +7,10 @@ module.exports = {
 	versionKey: false,
 	toObject: {
 		virtuals: true,
-		getters: true,
-		transform: (doc, ret) => {
-			ret.id = ret._id
-			delete ret._id
-			delete ret.__v
-			return ret
-		}
+		getters: true
 	},
 	toJSON: {
 		virtuals: true,
-		getters: true,
-		transform: (doc, ret) => {
-			ret.id = ret._id
-			delete ret._id
-			delete ret.__v
-			return ret
-		}
+		getters: true
 	}
 }

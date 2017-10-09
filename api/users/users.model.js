@@ -5,7 +5,17 @@ let dbOptions = require('../helpers/db.options'),
 let UserSchema = new Schema({
 	username: {
 		type: String,
-		required: 'Username is required'
+		required: 'Username is required',
+		validate: {
+			isAsync: true,
+			validator: function (value, callback) {
+				let UserModel = mongoose.model('Users')
+				UserModel.find({ 'username': value }, function (err, results) {
+					callback(err || !results.length)
+				})
+			},
+			message: 'This username already exists'
+		}
 	},
 	password: {
 		// ToDo: Hash passwords
@@ -14,12 +24,5 @@ let UserSchema = new Schema({
 		required: 'Password is required'
 	}
 }, dbOptions)
-
-UserSchema.path('username').validate(function (value, callback) {
-	let UserModel = mongoose.models.Users
-	UserModel.find({ 'username': value }, function (err, results) {
-		callback(err || results.length === 0)
-	})
-}, 'This username already exists')
 
 module.exports = mongoose.model('Users', UserSchema)
