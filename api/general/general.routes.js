@@ -1,10 +1,12 @@
+const { requestDecorator } = require('../helpers/request.decorator')
+
 module.exports = (app, domain, controller) => {
 	app.route(`/${domain}`)
-		.get(controller.getAll)
-		.post(controller.save)
+		.get(requestDecorator(controller.getAll))
+		.post(requestDecorator(controller.save))
 	
 	app.route(`/${domain}/:id`)
-		.get(controller.get)
-		.put(controller.update)
-		.delete(controller.delete)
+		.get(requestDecorator(controller.get))
+		.put(requestDecorator(controller.update))
+		.delete(requestDecorator(controller.delete))
 }

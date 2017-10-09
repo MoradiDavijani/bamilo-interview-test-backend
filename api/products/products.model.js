@@ -13,6 +13,8 @@ let AttributeValueSchema = new Schema({
 	}
 })
 
+mongoose.model('AttributeValue', AttributeValueSchema)
+
 let ProductSchema = new Schema({
 	title: {
 		type: String,
@@ -20,7 +22,7 @@ let ProductSchema = new Schema({
 	},
 	category: {
 		type: ObjectId,
-		ref: 'CategorySchema',
+		ref: 'Categories',
 		required: 'Specify category of the product'
 	},
 	model: {
@@ -29,7 +31,7 @@ let ProductSchema = new Schema({
 	},
 	attributes: [{
 		type: ObjectId,
-		ref: 'AttributeValueSchema',
+		ref: 'AttributeValue',
 		required: 'Specify model of the product'
 	}],
 	imgUrl: {
@@ -50,11 +52,7 @@ let ProductSchema = new Schema({
 	},
 	quantity: {
 		type: Number
-	},
-	created_date: {
-		type: Date,
-		default: Date.now
 	}
 })
 
-module.exports = mongoose.model('Product', ProductSchema)
+module.exports = mongoose.model('Products', ProductSchema)

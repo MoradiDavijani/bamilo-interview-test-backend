@@ -9,15 +9,11 @@ let AttributeSchema = new Schema({
 	},
 	category: {
 		type: ObjectId,
-		ref: 'CategorySchema'
+		ref: 'Categories'
 	},
 	description: {
 		type: String
-	},
-	created_date: {
-		type: Date,
-		default: Date.now
 	}
 })
 
-module.exports = mongoose.model('Attribute', AttributeSchema)
+module.exports = mongoose.model('Attributes', AttributeSchema)

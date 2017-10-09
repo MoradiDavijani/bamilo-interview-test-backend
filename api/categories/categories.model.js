@@ -12,12 +12,13 @@ let CategorySchema = new Schema({
 	},
 	parent: {
 		type: ObjectId,
-		ref: 'CategorySchema'
+		ref: 'Categories',
+		select: true
 	},
-	created_date: {
-		type: Date,
-		default: Date.now
-	}
+	children: [{
+		type: ObjectId,
+		ref: 'Categories'
+	}]
 })
 
-module.exports = mongoose.model('Category', CategorySchema)
+module.exports = mongoose.model('Categories', CategorySchema)

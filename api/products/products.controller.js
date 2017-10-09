@@ -1,5 +1,5 @@
-let mongoose      = require('mongoose'),
+let mongoose          = require('mongoose'),
     generalController = require('../general/general.controller'),
-    Product       = mongoose.model('Product')
+    Products          = mongoose.model('Products')
 
-Object.assign(exports, generalController(Product))
+Object.assign(exports, generalController(Products))

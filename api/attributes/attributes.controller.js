@@ -1,5 +1,5 @@
-let mongoose      = require('mongoose'),
+let mongoose          = require('mongoose'),
     generalController = require('../general/general.controller'),
-    Attribute     = mongoose.model('Attribute')
+    Attributes        = mongoose.model('Attributes')
 
-Object.assign(exports, generalController(Attribute))
+Object.assign(exports, generalController(Attributes))

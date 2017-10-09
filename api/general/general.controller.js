@@ -1,45 +1,20 @@
 module.exports = (Entity) => {
 	return {
-		getAll: (req, res) => {
-			Entity.find({}, (err, items) => {
-				if (err) {
-					res.send(err)
-				}
-				res.json(items)
-			})
+		get: (req, callback) => {
+			Entity.findById(req.params.id, callback)
 		},
-		save: (req, res) => {
+		getAll: (req, callback) => {
+			Entity.find({}, callback)
+		},
+		save: (req, callback) => {
 			let newItem = new Entity(req.body)
-			newItem.save((err, item) => {
-				if (err) {
-					res.send(err)
-				}
-				res.json(item)
-			})
+			newItem.save(callback)
 		},
-		get: (req, res) => {
-			Entity.findById(req.params.id, (err, item) => {
-				if (err) {
-					res.send(err)
-				}
-				res.json(item)
-			})
+		update: (req, callback) => {
+			Entity.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, callback)
 		},
-		update: (req, res) => {
-			Entity.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, item) => {
-				if (err) {
-					res.send(err)
-				}
-				res.json(item)
-			})
-		},
-		delete: (req, res) => {
-			Entity.remove({ _id: req.params.id }, (err) => {
-				if (err) {
-					res.send(err)
-				}
-				res.json({ message: 'Item successfully deleted' })
-			})
+		delete: (req, callback) => {
+			Entity.findOneAndRemove({ _id: req.params.id }, callback)
 		}
 	}
 }
