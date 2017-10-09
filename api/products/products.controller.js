@@ -3,3 +3,17 @@ let mongoose          = require('mongoose'),
     Products          = mongoose.model('Products')
 
 Object.assign(exports, generalController(Products))
+
+exports.get = (req, callback) => {
+	Products
+		.findById(req.params.id, callback)
+		.populate('category')
+		.populate('attributes.attribute')
+}
+
+exports.getAll = (req, callback) => {
+	Products
+		.find({ parent: null }, callback)
+		.populate('category')
+		.populate('attributes.attribute')
+}

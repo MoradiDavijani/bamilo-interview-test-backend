@@ -5,15 +5,10 @@ let mongoose = require('mongoose'),
 let AttributeValueSchema = new Schema({
 	attribute: {
 		type: ObjectId,
-		ref: 'AttributeSchema',
-		required: 'Attribute field is not specified'
+		ref: 'Attributes'
 	},
-	value: {
-		type: String
-	}
+	value: String
 })
-
-mongoose.model('AttributeValue', AttributeValueSchema)
 
 let ProductSchema = new Schema({
 	title: {
@@ -23,17 +18,23 @@ let ProductSchema = new Schema({
 	category: {
 		type: ObjectId,
 		ref: 'Categories',
-		required: 'Specify category of the product'
+		required: 'Specify category of the product',
+		validate: {
+			isAsync: true,
+			validator: function (value, callback) {
+				let CategoriesModel = mongoose.model('Categories')
+				CategoriesModel.find({ _id: value }, function (err, results) {
+					callback(err || (results.length && (!results[0].children || !results[0].children.length)))
+				})
+			},
+			message: 'Can\'t set products for categories that have children'
+		}
 	},
 	model: {
 		type: String,
 		required: 'Specify model of the product'
 	},
-	attributes: [{
-		type: ObjectId,
-		ref: 'AttributeValue',
-		required: 'Specify model of the product'
-	}],
+	attributes: [AttributeValueSchema],
 	imgUrl: {
 		type: String
 	},
@@ -44,11 +45,10 @@ let ProductSchema = new Schema({
 		type: Number
 	},
 	status: {
-		type: [{
-			type: String,
-			enum: ['Not Available', 'Available', 'Coming Soon']
-		}],
-		default: ['Not Available']
+		type: String,
+		required: 'Specify status of the product',
+		enum: ['Not Available', 'Available', 'Coming Soon'],
+		default: 'Not Available'
 	},
 	quantity: {
 		type: Number
