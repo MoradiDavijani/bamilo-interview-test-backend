@@ -41,6 +41,13 @@ exports.getUser = (req, res) => {
 			res.send(err)
 			return
 		}
+		if (!user) {
+			res.status(403)
+			res.json({
+				status: 403,
+				message: 'Invalid token'
+			})
+		}
 		res.json({
 			username: user.username
 		})
