@@ -23,6 +23,7 @@ exports.get = (req, callback) => {
 			path: 'children',
 			populate: { path: 'children' }
 		})
+		.populate('attributes')
 }
 
 exports.getAll = (req, callback) => {

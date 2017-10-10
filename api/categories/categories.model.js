@@ -18,6 +18,10 @@ let CategorySchema = new Schema({
 	children: [{
 		type: ObjectId,
 		ref: 'Categories'
+	}],
+	attributes: [{
+		type: ObjectId,
+		ref: 'Attributes'
 	}]
 })
 
