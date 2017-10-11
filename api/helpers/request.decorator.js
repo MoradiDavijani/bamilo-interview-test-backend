@@ -26,6 +26,7 @@ exports.requestDecorator = (handler) => {
 				status: 400,
 				message: 'Bad request: Invalid identifier'
 			})
+			return
 		}
 		handler(req, (err, result) => {
 			if (err) {

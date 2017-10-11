@@ -1,6 +1,7 @@
-module.exports = (app) => {
-	let controller    = require('./attributes.controller'),
-	    generalRoutes = require('../general/general.routes')
-	
-	generalRoutes(app, 'attributes', controller)
-}
+let controller            = require('./attributes.controller'),
+    router                = require('express').Router(),
+    registerGeneralRoutes = require('../general/general.routes')
+
+registerGeneralRoutes(router, controller)
+
+module.exports = router

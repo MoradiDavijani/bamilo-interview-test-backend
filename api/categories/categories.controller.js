@@ -35,6 +35,11 @@ exports.getAll = (req, callback) => {
 		})
 }
 
+exports.search = (req, callback) => {
+	Categories
+		.find({ parent: null }, callback)
+}
+
 exports.save = (req, callback) => {
 	if (restrictChangingChildren(req, callback)) {
 		return

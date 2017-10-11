@@ -1,9 +1,9 @@
-let authMiddleware = require('./auth.middleware')
+let controller     = require('./auth.controller'),
+    authMiddleware = require('./auth.middleware'),
+    router         = require('express').Router()
 
-module.exports = (app) => {
-	let AuthController = require('./auth.controller')
-	
-	app.route(`/auth`)
-		.get(authMiddleware, AuthController.getUser)
-		.post(AuthController.login)
-}
+router
+	.get('/', authMiddleware, controller.getUser)
+	.post('/', controller.login)
+
+module.exports = router

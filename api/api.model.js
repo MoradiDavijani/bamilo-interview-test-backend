@@ -1,4 +1,4 @@
-const Product   = require('./products/products.model'),
-      Category  = require('./categories/categories.model'),
-      Attribute = require('./attributes/attributes.model'),
-      User      = require('./users/users.model')
+require('./products/products.model')
+require('./categories/categories.model')
+require('./attributes/attributes.model')
+require('./users/users.model')

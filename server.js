@@ -4,7 +4,7 @@ let express    = require('express'),
     mongoose   = require('mongoose'),
     morgan     = require('morgan'),
     bodyParser = require('body-parser'),
-    routes     = require('./api/api.routes')
+    routes = require('./api/api.routes')
 
 require('./api/api.model')
 
@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-routes(app)
+routes.register(app)
 
 app.listen(config.port)
 console.log('Server Started On Port: ' + config.port)
