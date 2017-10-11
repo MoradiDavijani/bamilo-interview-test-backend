@@ -5,7 +5,8 @@ let mongoose = require('mongoose'),
 let AttributeValueSchema = new Schema({
 	attribute: {
 		type: ObjectId,
-		ref: 'Attributes'
+		ref: 'Attributes',
+		required: 'Please specify attribute of attribute-value object'
 	},
 	value: String
 })
