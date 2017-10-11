@@ -18,17 +18,7 @@ let ProductSchema = new Schema({
 	category: {
 		type: ObjectId,
 		ref: 'Categories',
-		required: 'Specify category of the product',
-		validate: {
-			isAsync: true,
-			validator: function (value, callback) {
-				let CategoriesModel = mongoose.model('Categories')
-				CategoriesModel.find({ _id: value }, function (err, results) {
-					callback(err || (results.length && (!results[0].children || !results[0].children.length)))
-				})
-			},
-			message: 'Can\'t set products for categories that have children'
-		}
+		required: 'Specify category of the product'
 	},
 	model: {
 		type: String,

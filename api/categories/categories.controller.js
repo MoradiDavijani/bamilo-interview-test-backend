@@ -39,6 +39,7 @@ exports.search = (req, callback) => {
 	Categories
 		.find({ title: new RegExp(req.query.title, 'i') })
 		.limit(+req.query.limit)
+		.populate('attributes')
 		.exec(callback)
 }
 
