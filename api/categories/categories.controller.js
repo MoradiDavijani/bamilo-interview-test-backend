@@ -1,5 +1,5 @@
-let mongoose          = require('mongoose'),
-    Categories        = mongoose.model('Categories')
+let mongoose   = require('mongoose'),
+    Categories = mongoose.model('Categories')
 
 let restrictChangingChildren = (req, callback) => {
 	if (req.body && req.body.children && req.body.children.length) {
@@ -91,6 +91,8 @@ exports.update = (req, callback) => {
 					// ToDo: rollback if updating children returned any error
 					console.error('Error occurred during updating children')
 				})
+		} else {
+			callback(err, result)
 		}
 	})
 }
