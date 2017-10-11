@@ -37,7 +37,9 @@ exports.getAll = (req, callback) => {
 
 exports.search = (req, callback) => {
 	Categories
-		.find({ parent: null }, callback)
+		.find({ title: new RegExp(req.query.title, 'i') })
+		.limit(+req.query.limit)
+		.exec(callback)
 }
 
 exports.save = (req, callback) => {
